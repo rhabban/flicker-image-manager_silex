@@ -1,1 +1,1 @@
-flicker-image-manager_silex
+Silex Flicker Image Manager

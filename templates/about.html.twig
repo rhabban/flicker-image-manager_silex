@@ -1,0 +1,59 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+        <h1>About</h1>
+        <h3> Un projet réalisé par Bastien Sebire et Corentin Chupin dans le cadre du module <i>Ateliers du Web</i> du Master DNR2I, animé par Jean-Marc Lecarpentier. </h3>
+
+        <hr>
+
+        <h4> Objectifs </h4>
+        <p>Le devoir fait suite aux ateliers sur les matédonnées dans les pages web et les images.
+            L'objectif du devoir est de réaliser une galerie d'images simple sans base de données.
+        </p>
+        <hr>
+        <h4> Technologies utilisées </h4>
+        <ul>
+          <li>Développement backend avec le Framework PHP Silex</li>
+          <li>Moteur de template Twig</li>
+          <li>Interface avec Bootstrap</li>
+          <li>Jquery</li>
+          <li>API Flickr</li>
+          <li>Lightbox pour l'affichage d'une image</li>
+          <li>Fileinput pour l'upload des images</li>
+          <li>Manipulation des métas-données avec Exiftool</li>
+        </ul>
+        <br/>
+
+        <h4> Pré requis </h4>
+        <ul>
+          <li>Serveur Apache</li>
+          <li>PHP 5.5.9 à minima</li>
+          <li>Gestionnaire de dépendance Composer</li>
+        </ul>
+        <br/>
+
+        <h4> Déploiement de l'application </h4>
+        <ol>
+          <li> Se placer à la racine du projet </li>
+          <li> Ouvrir un terminal et rentrer la commande <b><i>composer update</i></b></li>
+          <li> L'accès à la page principale se fait via l'url suivante : <b><i>web/index.php/</i></b></li>
+        </ol>
+        <br/>
+
+        <h4> Problèmes rencontrés </h4>
+        <p>Durant le développement de cette application, nous nous sommes confrontés à des problématiques liées à l'édition des méta données. En effet,
+        nous avons pu constater que certains fichiers sont protégés et qu'il est parfois impossible de modifier certains champs. Afin d'avoir une trace
+        des processus d'édition, nous avons mis en place un <b>système de logs</b> qui fournit des informations concernant la modification des méta données.
+        Ces logs sont disponibles dans le dossier <em>/web/logs</em>. </p>
+
+        <br/>
+
+        <h4> Liens </h4>
+        <ul>
+          <li><a href="https://ensweb.users.info.unicaen.fr/syllabus/index_m2-dnr2i-umdn3c.php"> Cours Atelier du Web</a></li>
+          <li><a href="https://gitlab.com/dnr2i/image-gallery"> Gitlab du projet </a></li>
+        </ul>
+    </div>
+
+{% endblock %}

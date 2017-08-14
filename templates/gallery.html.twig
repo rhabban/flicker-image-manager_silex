@@ -1,0 +1,47 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>Gallery</h1>
+    <div class="row">
+    {% for file in files %}
+        {% if file != "." and file != ".." %}
+
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="hovereffect">
+              <a href="{{ path('image', {'name' : file}) }}">
+                <figure>
+                  <img src="{{ asset('/images/' ~ file ) }}" class="img-responsive" alt="{{ file }}"/>
+                </figure>
+              </a>
+                <div class="overlay">
+                    <h2> {{ file }} </h2>
+                    <a class="info" href="{{ path('image_detail', {'name' : file}) }}">View</a>
+                    <a class="info" href="{{ path('image', {'name' : file}) }}">Edit</a>
+                    <a class="info" href="{{ asset('/images/' ~ file ) }}" download="{{ file }}">Download</a>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+        $('img').click(function(){
+            var filename = $(this).attr('alt');
+            $.ajax({
+                url: '{{ path('meta') }}',
+                type: 'GET',
+                data: {filename: filename},
+                success: function (daten) {
+                    console.log(daten);
+                },
+                error: function () {
+                    console.log('error at writing');
+                }
+            });
+        })
+    </script>
+
+{% endblock %}

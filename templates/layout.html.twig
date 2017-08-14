@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Image gallery</title>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="{{ asset("css/main.css") }}" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- File input -->
+    <link href="{{ asset("css/fileinput.css") }}" media="all" rel="stylesheet" type="text/css" />
+    <script src="{{ asset("js/fileinput.min.js") }}"></script>
+
+    <!-- lightbox -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script>
+
+    <script src="{{ asset("js/jquery.buttonLoader.js") }}"></script>
+
+
+</head>
+<body>
+{% include("navbar.html.twig") %}
+<div class="container-fluid" style="margin-top:80px">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

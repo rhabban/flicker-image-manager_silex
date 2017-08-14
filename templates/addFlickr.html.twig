@@ -1,0 +1,74 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+        <h1>Import from flickr</h1>
+
+        <div class="row">
+    		<h2>Type a word</h2>
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" placeholder="Search" id="searchText"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button" id="search">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="displayImages" class="row">
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    $(document).ready(function () {
+
+
+      $( "#search" ).click(function() {
+
+        $("#displayImages").empty();
+        var searchText = $("#searchText").val().replace(/\ /g, ' ');
+        var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7234107483e53dc6d71dbbaf2b3b1795&tags=" + searchText + "&safe_search=1&per_page=20&format=json";
+        var src;
+        $.getJSON(url + "&format=json&jsoncallback=?", function(data){
+            $.each(data.photos.photo, function(i,item){
+                src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_q.jpg";
+                srcOriginal = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_b.jpg";
+                var urlUpload = "{{ path('uploadFlickr', {'url' : "srcOriginal"}) }}";
+                urlUpload = urlUpload.replace("srcOriginal", srcOriginal);
+
+                var node = '<div class="col-sm-6 col-md-3"><div class="thumbnail"><a href="' + srcOriginal + '"><img src="' + src + '" alt="' + item.title + '" class="img-rounded img-thumbnail"></a><div class="caption"><h5 class="elipsis">' + item.title + '</h5><p><a href="'+urlUpload+'" alt="Get Image"><button class="btn btn-primary has-spinner uploadFlickr" data-url="uploadFlickr/8/7703/26574584310/f8be33914f/1024-2006_1011_093752"> Import </button></a></p></div></div></div>';
+
+                $("#displayImages").append(node);
+                if ( i == 20 ) return false;
+            });
+        });
+
+      });
+
+
+      $('.uploadFlickr').click(function () {
+      	var btn = $(this);
+          $(btn).buttonLoader('start', "Importing...");
+  		$.ajax({
+  	        url: $( this ).data("url"),
+  	        cache: false
+  		    }).done(function (html) {
+  		    	$(btn).buttonLoader('stop', "Importing...");
+  		    	$(btn).text("Imported");
+  		    	$(btn).removeClass("btn-primary").addClass("btn-warning");
+  	    });
+      });
+    });
+
+
+
+    </script>
+
+{% endblock %}
